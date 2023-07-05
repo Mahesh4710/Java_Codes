@@ -1,0 +1,59 @@
+package com.myphonebook;
+
+import java.util.Scanner;
+
+public class RunClass {
+
+    public static void main(String[] args) {
+        PhoneBook pb = new PhoneBook();
+
+        String option;
+        do {
+            System.out.println("Follow the instructions:");
+            System.out.println(" 1: Display your phone book");
+            System.out.println(" 2: Insert new Phone Book");
+            System.out.println(" 3: Update Details on Existing Contact");
+            System.out.println(" 4: Delete Contact");
+            System.out.println(" 5: Search by name");
+            System.out.println(" 6: Search by email");
+            System.out.println(" 7: Search by number");
+            System.out.println(" 8: Exit");
+            
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter your choice:");
+            option = sc.next();
+            sc.nextLine(); // consume newline character
+
+            switch (option) {
+                case "1":
+                    pb.display();
+                    break;
+                case "2":
+                    pb.insert();
+                    break;
+                case "3":
+                    pb.update();
+                    break;
+                case "4":
+                    pb.delete();
+                    break;
+                case "5":
+                	pb.search_name();
+                    break;
+                case "6":
+                	pb.search_email();
+                    break;
+                case "7":
+                	pb.searchByNumber();
+                    break;
+                case "8":
+                	 System.out.println("Exiting program...");
+                	 return;
+                                  
+                default:
+                    System.out.println("Invalid choice.");
+                    break;
+            }
+        } while (true);
+    }
+}

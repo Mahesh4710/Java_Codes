@@ -1,0 +1,10 @@
+package com.exceptions.main;
+
+public class DivideByZeroMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

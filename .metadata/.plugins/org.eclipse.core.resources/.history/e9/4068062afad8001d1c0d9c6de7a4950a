@@ -1,0 +1,37 @@
+package com.threds;
+
+public class DeadlockDemo {
+	private String name1="Amit";
+	private String name2="Sumit";
+	
+	public void lock1() {
+		System.out.println("t1 wants aquired lock1");		
+		synchronized(name1) {
+			System.out.println("t1 aquired lock1");
+			System.out.println("t1 want aquired lock2");
+			synchronized (name2) {
+				System.out.println("t2 aquired ");
+			}
+			
+		}
+		
+		
+	}
+	public void lock2() {
+		System.out.println("t2 aquired lock1");		
+		synchronized(name2) {
+			System.out.println("t2 aquired lock1");
+			System.out.println("t2 want aquired lock2");
+			synchronized (name2) {
+				System.out.println("t1 aquired ");
+			}
+			
+		}
+	}
+	public static void main(String[] args) {
+		DeadlockDemo obj=new DeadlockDemo();
+		
+		Thread t1=new Thread(() -> obj.lock1());
+		Thread t1=new Thread(() -> obj.lock2());
+	}
+}

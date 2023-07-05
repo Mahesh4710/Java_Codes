@@ -1,0 +1,152 @@
+package com.miniapp;
+
+import java.util.Scanner;
+//Kartik start
+public class Student {
+    String name;
+    String subject;
+    int mark;
+    Student next;
+
+    public Student(String name, String subject, int mark) {
+        this.name = name;
+        this.subject = subject;
+        this.mark = mark;
+        this.next = null;
+    }
+//kartik end
+    
+    // mahesh start
+    public String toString() {
+        return "Name: " + name + ", Subject: " + subject + ", Mark: " + mark;
+    }
+
+    public static Student mergeSort(Student head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        Student mid = getMid(head);
+        Student left = head;
+        Student right = mid.next;
+        mid.next = null;
+        Student sleft = mergeSort(left);
+        Student sright = mergeSort(right);
+
+        // Ensure that sleft and sright are sorted
+        if (sleft != null && sleft.next != null) {
+            Student prev = sleft;
+            Student curr = sleft.next;
+            while (curr != null) {
+                if (prev.mark > curr.mark) {
+                    throw new IllegalStateException("sleft is not sorted");
+                }
+                prev = curr;
+                curr = curr.next;
+            }
+        }
+        if (sright != null && sright.next != null) {
+            Student prev = sright;
+            Student curr = sright.next;
+            while (curr != null) {
+                if (prev.mark > curr.mark) {
+                    throw new IllegalStateException("sright is not sorted");
+                }
+                prev = curr;
+                curr = curr.next;
+            }
+        }
+
+        return merge(sleft, sright);
+    }
+
+    //mahesh end
+
+    //Rohan start
+    public static Student merge(Student left, Student right) {
+        Student dummy = new Student("", "", 0);
+        Student curr = dummy;
+        while (left != null && right != null) {
+            if (left.mark <= right.mark) {
+                curr.next = left;
+                left = left.next;
+            } else {
+                curr.next = right;
+                right = right.next;
+            }
+            curr = curr.next;
+        }
+        if (left != null) {                 
+            curr.next = left;
+        } else if (right != null) {
+            curr.next = right;
+        }
+        return dummy.next;
+    }
+    //rohan end
+    
+    
+    
+    //Mayur start
+    public static Student getMid(Student head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        Student slow = head;
+        Student fast = head.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+    //Mayur end
+    
+    
+//Akash start
+    public static void main(String[] args) {
+        Student head = null;
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("1. Add student to list");
+            System.out.println("2. Sort and display list");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = sc.nextInt();
+            if (choice == 1) {
+                System.out.print("Enter student name: ");
+                String name = sc.next();
+                System.out.print("Enter subject: ");
+                String subject = sc.next();
+                System.out.print("Enter mark: ");
+                int mark = sc.nextInt();
+                if (head == null) {
+                    head = new Student(name, subject, mark);
+                } else {
+                    Student curr = head;
+                    while (curr.next != null) {
+                        curr = curr.next;
+                    }
+                    curr.next = new Student(name, subject, mark);
+                }
+ // akash end
+                
+ // omkar start               
+            } else if (choice == 2) {
+                head = mergeSort(head);
+                System.out.println("Sorted list:");
+                Student curr = head;
+                while (curr != null) {
+                    System.out.println(curr);
+                    curr = curr.next;
+                }
+            } else if (choice == 3) {
+                break;
+            } else {
+                System.out.println("Invalid choice, please try again.");
+            }
+        }
+        sc.close();
+// omkar end        
+    }
+}
+//thank you

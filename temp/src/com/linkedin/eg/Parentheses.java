@@ -1,0 +1,36 @@
+package com.linkedin.eg;
+
+public class Parentheses {
+
+    public static boolean isBalanced(String str) {
+        char[] arr = new char[str.length()];
+        int top = -1;
+
+        for (int i= 0; i< str.length(); i++) {
+            char p = str.charAt(i);
+            if (p == '(') {
+            	top++;
+                arr[top] = p;
+            } else if (p == ')') {
+                if (top == -1 || arr[top] != '(') {
+                    return false;
+                }
+                top--;
+            }
+        }
+        return top == -1;
+    }
+
+    public static void main(String[] args) {
+        String str1 = "((()))";
+        String str2 = "((())";
+        String str3="()()()";
+        String str4=")()";
+        
+        
+        System.out.println(isBalanced(str1)); 
+        System.out.println(isBalanced(str2)); 
+        System.out.println(isBalanced(str3)); 
+        System.out.println(isBalanced(str4)); 
+    }
+}

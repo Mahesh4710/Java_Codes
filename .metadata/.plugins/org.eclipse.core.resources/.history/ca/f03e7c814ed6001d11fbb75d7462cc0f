@@ -1,0 +1,38 @@
+package com.entity;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+
+public class ReaderWriterDemo {
+	File file=new File(
+			"C:\\javaprg\\d1.txt");
+	public void writeData(){
+		try (FileWriter writerHere=new FileWriter(file)){
+			String data="I love my country";
+			writerHere.write(data);
+			System.out.println("Data saved in file");
+		}
+		catch(IOException exc) {
+			exc.printStackTrace();
+		}
+	}
+	public void readCharByChar() {
+		try(FileReader readerHere=new FileReader(file)){
+			String str="";
+			int x=0;
+			while((x=readerHere.read())!=1) {
+				str=str+(char)x;
+			}
+			System.out.println("Data from file"+str);
+		} 
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+	}
+}
